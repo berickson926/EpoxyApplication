@@ -7,6 +7,8 @@ import com.airbnb.epoxy.EpoxyRecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
+data class Person(val personId: String = "", val name: String = "")
+
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,20 +16,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val people = arrayListOf(Person(1.toString(), "bret"), Person(2.toString(), "bob"))
-        simpleSetup(people)
-//        moreRobustSetup(people)
+//        simpleSetup(people)
+        moreRobustSetup(people)
     }
-    
+
 
     private fun simpleSetup(people: List<Person>) {
         epoxy_list.withModels {
 
             titleView {
-                id("Title")
+                id("TitleId")
             }
 
             people.forEach {
-
                 personView {
                     id(it.personId)
                     name(it.name)
@@ -53,7 +54,6 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 people.forEach {
-
                     personView {
                         id(it.personId)
                         name(it.name)
@@ -79,5 +79,3 @@ fun EpoxyRecyclerView.withModels(buildModelsCallback: EpoxyController.() -> Unit
         }
     })
 }
-
-data class Person(val personId: String = "", val name: String = "")
